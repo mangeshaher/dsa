@@ -53,27 +53,62 @@ void printList(DNode* head){
 }
 
 void insertAfter(DNode* node, int value){
+	DNode* next_node = node -> next;
 	DNode* new_node = new DNode();
 	new_node -> data = value;
 	new_node -> prev = node;
-	DNode* next_node = node -> next;
 	new_node -> next = next_node;
 	if(next_node!=NULL){
 		next_node -> prev = new_node;
 	}
+	node->next = new_node;
 }
 
 void insertBefore(DNode** head, DNode* node, int value){
+	DNode* prev_node = node->prev;
 	DNode* new_node = new DNode();
 	new_node -> data = value;
 	new_node -> next = node;
-	DNode* prev_node = node->prev;
-	node -> prev = prev_node;
+	new_node -> prev = prev_node;
 	if(prev_node == NULL){
 		*head = node;
 	}
 	else{
-		prev_node -> next = node;
+		prev_node -> next = new_node;
+	}
+}
+
+void deleteAtStart(DNode** head){
+	if(*head == NULL){
+		cout<<"Nothing to delete as head is null\n";
+	}
+	else{
+		DNode* next_node = (*head)->next;
+		free(*head);
+		*head = next_node;
+		if(next_node!=NULL){
+			next_node -> prev = NULL;
+		}
+	}
+}
+
+void deleteAtEnd(DNode** head){
+	if(*head == NULL){
+		cout<<"Nothing to delete as head is null\n";
+	}
+	else{
+		DNode* temp = (*head);
+		while(temp->next!=NULL){
+			temp = temp -> next;
+		}
+		DNode* last_prev = temp->prev;
+		free(temp);
+		if(last_prev!=NULL){
+			last_prev -> next = NULL;
+		}
+		else{
+			*head = NULL;
+		}
 	}
 }
 
@@ -86,11 +121,11 @@ int main()
 	for(int i=0;i<n;i++){
 		append(&head,i);
 	}
-	//insertAfter(&head,20,8);
-	//push(&head,9);
+	insertAfter(head->next,8);
+	insertBefore(&head,head->next,6);
+	push(&head,9);
 	printList(head);
-	//deleteAtStart(&head);
-	//deleteAtEnd(&head);
-	//deleteAfter(&head,2,8);
-	//printList(head);
+	deleteAtStart(&head);
+	deleteAtEnd(&head);
+	printList(head);
 } 
