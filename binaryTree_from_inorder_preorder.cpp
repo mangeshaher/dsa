@@ -13,17 +13,6 @@ public:
 	}
 };
 
-int searchInorderIndex(vector<int> inorder,int inStart,int inEnd,int preOrderValue){
-	int retval;
-	for(int i=inStart;i<=inEnd;i++){
-		if(preOrderValue == inorder[i]){
-			retval = i;
-			break;
-		}
-	}
-	return retval;
-}
-
 TreeNode* buildTree(vector<int> preorder,vector<int> inorder,int inStart,int inEnd,unordered_map<int,int> map){
 	int static preIndex = 0;
 	if(inStart<=inEnd){
