@@ -92,9 +92,8 @@ TreeNode* deleteNode(TreeNode* root, int key){
 			}
 			else{
 				TreeNode* node = successor(root);
-				root->right = deleteNode(root->right,node->data);
+				node->right = deleteNode(root->right,node->data);
 				node->left = root->left;
-				node->right = root->right;
 				free(root);
 				retval = node;
 			}
