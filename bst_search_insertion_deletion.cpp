@@ -59,6 +59,49 @@ void levelOrderTraversal(TreeNode* root){
 	}
 }
 
+TreeNode* successor(TreeNode* root){
+	TreeNode* right = root->right;
+	while(right->left!=NULL){
+		right = right->left;
+	}
+	return right;
+}
+
+TreeNode* deleteNode(TreeNode* root, int key){
+	TreeNode* retval;
+	if(root->data < key){
+		root->right = deleteNode(root->right,key);
+		retval = root;
+	}
+	else if(root->data > key){
+		root->left = deleteNode(root->left,key);
+		retval = root;	
+	}
+	else{
+			if(root->left==NULL&&root->right==NULL){
+				free(root);
+				retval = NULL;
+			}
+			else if(root->left==NULL){
+				retval = root->right;
+				free(root);
+			}
+			else if(root->right==NULL){
+				retval = root->left;
+				free(root);
+			}
+			else{
+				TreeNode* node = successor(root);
+				root->right = deleteNode(root->right,node->data);
+				node->left = root->left;
+				node->right = root->right;
+				free(root);
+				retval = node;
+			}
+	}
+	return retval;
+}
+
 // Driver program 
 int main() 
 { 
@@ -69,5 +112,5 @@ int main()
 		cin>>val;
 		root = insert(root,val);
 	}
-	levelOrderTraversal(root);
+	levelOrderTraversal(deleteNode(root,3));
 } 
