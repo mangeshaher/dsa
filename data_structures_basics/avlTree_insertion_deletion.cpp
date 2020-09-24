@@ -58,22 +58,21 @@ TreeNode* insert(TreeNode* root, int key){
 	}
 	root -> height = max(getHeight(root->left),getHeight(root->right))+1;
 	int bal = balance(root);
-	TreeNode* node;
 	if(bal<-1 && key>root->right->data){
-		node = leftRotate(root);
+		root = leftRotate(root);
 	}
 	if(bal<-1 && key<root->right->data){
 		root->right = rightRotate(root->right);
-		node = leftRotate(root);
+		root = leftRotate(root);
 	}
 	if(bal>1 && key<root->left->data){
-		node = rightRotate(root);
+		root = rightRotate(root);
 	}
 	if(bal>1 && key>root->left->data){
 		root->left = leftRotate(root->left);
-		node = rightRotate(root); 
+		root = rightRotate(root); 
 	}
-	return node;
+	return root;
 }
 
 void levelOrderTraversal(TreeNode* root){
@@ -82,7 +81,7 @@ void levelOrderTraversal(TreeNode* root){
 	while(!nodeQueue.empty()){
 		TreeNode* front = nodeQueue.front();
 		if(front!=NULL){
-			cout<<front->data<<" ";
+			cout<<"Data :- "<<front->data<<" Height :- "<<front->height<<endl;
 			nodeQueue.push(front->left);
 			nodeQueue.push(front->right);
 		}
@@ -100,5 +99,5 @@ int main()
 	root = insert(root,40);
 	root = insert(root,50);
 	root = insert(root,25);
-	//levelOrderTraversal(root);
+	levelOrderTraversal(root);
 } 
