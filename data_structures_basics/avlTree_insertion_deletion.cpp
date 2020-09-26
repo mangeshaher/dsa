@@ -15,6 +15,24 @@ public:
 	}
 };
 
+TreeNode* search(TreeNode* root, int key){
+	if(root!=NULL){
+		if(root->data == key){
+			return root;
+		}
+		else if(key<root->data){
+			return search(root->left,key);
+		}
+		else{
+			return search(root->right,key);
+		}
+	}
+	else{
+		cout<<"The searched key node "<<key<<" was not found"<<endl;
+		return NULL;
+	}
+}
+
 TreeNode* successor(TreeNode* root){
 	TreeNode* right = root->right;
 	while(right->left!=NULL){
@@ -165,5 +183,6 @@ int main()
 	root = insert(root,25);
 	levelOrderTraversal(root);
 	cout<<"After Deletion\n";
+	TreeNode* searched = search(root,2);
 	levelOrderTraversal(deleteNode(root,20));
 } 
