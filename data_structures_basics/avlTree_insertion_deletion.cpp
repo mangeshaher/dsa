@@ -15,6 +15,14 @@ public:
 	}
 };
 
+TreeNode* successor(TreeNode* root){
+	TreeNode* right = root->right;
+	while(right->left!=NULL){
+		right = right->left;
+	}
+	return right;
+}
+
 int getHeight(TreeNode* node){
 	return (node!=NULL) ? node->height : 0;
 }
@@ -75,6 +83,62 @@ TreeNode* insert(TreeNode* root, int key){
 	return root;
 }
 
+TreeNode* deleteNode(TreeNode* root, int key){
+	TreeNode* retval;
+	if(root==NULL){
+		retval = root;
+	}
+	else if(root->data < key){
+		root->right = deleteNode(root->right,key);
+		retval = root;
+	}
+	else if(root->data > key){
+		root->left = deleteNode(root->left,key);
+		retval = root;	
+	}
+	else{
+			if(root->left==NULL&&root->right==NULL){
+				free(root);
+				retval = NULL;
+			}
+			else if(root->left==NULL){
+				retval = root->right;
+				free(root);
+			}
+			else if(root->right==NULL){
+				retval = root->left;
+				free(root);
+			}
+			else{
+				TreeNode* nodeToDelete = successor(root);
+				TreeNode* node = new TreeNode(nodeToDelete->data);
+				node->right = deleteNode(root->right,node->data);
+				node->left = root->left;
+				free(root);
+				retval = node;
+			}
+	}
+	if(retval!=NULL){
+		retval -> height = max(getHeight(retval->left),getHeight(retval->right))+1;
+		int bal = balance(retval);
+		if(bal<-1 && key>retval->right->data){
+			retval = leftRotate(retval);
+		}
+		if(bal<-1 && key<retval->right->data){
+			retval->right = rightRotate(retval->right);
+			retval = leftRotate(retval);
+		}
+		if(bal>1 && key<retval->left->data){
+			retval = rightRotate(retval);
+		}
+		if(bal>1 && key>retval->left->data){
+			retval->left = leftRotate(retval->left);
+			retval = rightRotate(retval); 
+		}	
+	}
+	return retval;
+}
+
 void levelOrderTraversal(TreeNode* root){
 	queue<TreeNode*> nodeQueue;
 	nodeQueue.push(root);
@@ -100,4 +164,6 @@ int main()
 	root = insert(root,50);
 	root = insert(root,25);
 	levelOrderTraversal(root);
+	cout<<"After Deletion\n";
+	levelOrderTraversal(deleteNode(root,20));
 } 
