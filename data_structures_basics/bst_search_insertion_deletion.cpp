@@ -26,6 +26,7 @@ TreeNode* search(TreeNode* root, int key){
 		}
 	}
 	else{
+		cout<<"The searched key node was not found"<<endl;
 		return NULL;
 	}
 }
