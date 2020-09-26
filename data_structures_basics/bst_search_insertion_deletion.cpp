@@ -69,7 +69,10 @@ TreeNode* successor(TreeNode* root){
 
 TreeNode* deleteNode(TreeNode* root, int key){
 	TreeNode* retval;
-	if(root->data < key){
+	if(root==NULL){
+		retval = root;
+	}
+	else if(root->data < key){
 		root->right = deleteNode(root->right,key);
 		retval = root;
 	}
@@ -111,5 +114,5 @@ int main()
 		cin>>val;
 		root = insert(root,val);
 	}
-	levelOrderTraversal(deleteNode(root,3));
-} 
+	levelOrderTraversal(deleteNode(root,7));
+}
