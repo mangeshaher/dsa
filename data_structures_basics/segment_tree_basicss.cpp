@@ -20,6 +20,19 @@ int* updateTreeNode(int position,int value,int st[],int n){
 	return st;
 }
 
+int query(int l, int r, int st[], int n){
+	int res=0;
+	for(l+=n,r+=n;l<r;l>>=1,r>>=1){
+		if(l&1){
+			res+=st[l++];
+		}
+		if(r&1){
+			res+=st[--r];
+		}
+	}
+	return res;
+}
+
 // Driver program 
 int main() 
 {
