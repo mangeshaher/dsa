@@ -12,6 +12,13 @@ int* createST(int arr[], int st[], int n){
 	return st;
 }
 
+int* updateTreeNode(int position,int value,int st[],int n){
+	st[position+n] = value;
+	for(int i=position+n;i>1;i>>=1){
+		st[i>>1] = st[i] + st[i^1];	
+	}
+	return st;
+}
 
 // Driver program 
 int main() 
@@ -24,4 +31,5 @@ int main()
 	}
 	int st[2*n];
 	int* retval = createST(arr,st,n);
+	retval = updateTreeNode(2,9,retval,n);
 }
