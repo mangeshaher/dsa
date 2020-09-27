@@ -25,9 +25,11 @@ int query(int l, int r, int st[], int n){
 	for(l+=n,r+=n;l<r;l>>=1,r>>=1){
 		if(l&1){
 			res+=st[l++];
+			cout<<"l is := "<<l<<endl;
 		}
 		if(r&1){
 			res+=st[--r];
+			cout<<"r is := "<<r<<endl;
 		}
 	}
 	return res;
@@ -45,4 +47,5 @@ int main()
 	int st[2*n];
 	int* retval = createST(arr,st,n);
 	retval = updateTreeNode(2,9,retval,n);
+	cout<<query(0,4,retval,n)<<endl;
 }
