@@ -14,8 +14,8 @@ void printAdjList(std::vector<int> v[],int vertices){
 	}
 }
 
-void BFS(std::vector<int> adj[],int vertices, int startIndex){
-	bool visited[vertices+1];
+void BFS(std::vector<int> adj[],int vertices,int startIndex){
+	bool visited[vertices];
 	for(int i=0;i<vertices;i++){
 		visited[i] = false;
 	}
@@ -38,6 +38,31 @@ void BFS(std::vector<int> adj[],int vertices, int startIndex){
 	cout<<endl;
 }
 
+void DFS(std::vector<int> adj[],int vertices,int startIndex){
+	bool visited[vertices];
+	for(int i=0;i<vertices;i++){
+		visited[i] = false;
+	}
+	stack<int> stk;
+	stk.push(startIndex);
+	cout<<"DFS is :- ";
+	while(!stk.empty()){
+		int top = stk.top();
+		stk.pop();
+		if(!visited[top]){
+			cout<<top<<" ";
+			for(int i=0;i<adj[top].size();i++){
+				if(!visited[adj[top].at(i)]){
+					stk.push(adj[top].at(i));
+					//cout<<"Pushing"<<adj[top].at(i)<<endl;
+				}
+			}
+			visited[top]=true;
+		}
+	}
+	cout<<endl;	
+}
+
 // Driver program 
 int main() 
 { 
@@ -50,5 +75,6 @@ int main()
 		adj[v].push_back(u);
 	}
 	printAdjList(adj,n);
-	BFS(adj,n,6);
+	BFS(adj,n,0);
+	DFS(adj,n,0);
 }
