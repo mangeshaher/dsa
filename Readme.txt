@@ -8,3 +8,10 @@ Added Data Structures Basics For :-
 * Segment Tree
 * Trie
 * Graphs
+
+Standard Problems:-
+* Heap
+** Program for k largest elements
+
+* Graph
+** BFS question to check whether path exists or not betn source and destn
