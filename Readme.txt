@@ -10,6 +10,10 @@ Added Data Structures Basics For :-
 * Graphs
 
 Standard Problems:-
+* Array
+** Merge Sort
+** Quick Sort
+
 * Heap
 ** Program for k largest elements
 
