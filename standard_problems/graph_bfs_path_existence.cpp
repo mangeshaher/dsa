@@ -2,6 +2,10 @@
 #include <bits/stdc++.h> 
 using namespace std; 
 
+//cell with 1 is source
+//cell with 2 is destn
+//cell with 0 is wall
+
 // Driver program 
 int main() 
 { 
