@@ -16,6 +16,12 @@ int partition(int a[], int left,int right){
 	return i;
 }
 
+/*
+f(n) = O(n) + f(k) + f(n-k)
+here function depends on which pivotIndex is returned by partition function
+so in the best case when pivotIndex divides the function into significant halfs complexity is O(nlogn)
+and in the worst case O(n^2) when division is almost at ends
+*/
 void quickSort(int a[], int left, int right){
 	if(left<right){
 		int pivotIndex = partition(a,left,right);
