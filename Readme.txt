@@ -14,6 +14,10 @@ Standard Problems:-
 ** Merge Sort
 ** Quick Sort
 
+* Linked List
+** Reversal of Linked List
+** Removal and Detection of Loop in Linked List
+
 * Heap
 ** Program for k largest elements
 
