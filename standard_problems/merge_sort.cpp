@@ -30,6 +30,11 @@ void merge(int a[], int left, int mid, int right){
 	}
 }
 
+/*
+f(n) = O(n) + 2f(n/2)
+merge takes O(n) and other two function calls take half of time
+thus the complexity is always O(nlogn) 
+*/
 void mergeSort(int a[],int left, int right){
 	if(left<right){
 		int mid = (right+left)/2;
